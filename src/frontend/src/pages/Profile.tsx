@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useInternetIdentity } from "@caffeineai/core-infrastructure";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   Edit2,
@@ -14,7 +15,6 @@ import type React from "react";
 import { useState } from "react";
 import EditProfileForm from "../components/profile/EditProfileForm";
 import { useAppContext } from "../contexts/AppContext";
-import { useInternetIdentity } from "../hooks/useInternetIdentity";
 import MainLayout from "../layouts/MainLayout";
 import type { UserProfile } from "../types";
 

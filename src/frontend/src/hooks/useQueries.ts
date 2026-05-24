@@ -1,53 +1,27 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { UserRole } from "../backend";
-import { useActor } from "./useActor";
+import { useQuery } from "@tanstack/react-query";
 
 // Hook to get the caller's role from the backend
+// Placeholder hook — backend has no role methods in this build
 export function useCallerRole() {
-  const { actor, isFetching } = useActor();
-
-  return useQuery<UserRole>({
+  return useQuery<string>({
     queryKey: ["callerRole"],
-    queryFn: async () => {
-      if (!actor) return UserRole.guest;
-      return actor.getCallerUserRole();
-    },
-    enabled: !!actor && !isFetching,
+    queryFn: async () => "guest",
     staleTime: 5 * 60 * 1000,
   });
 }
 
 // Hook to check if caller is admin
+// Placeholder hook — backend has no role methods in this build
 export function useIsAdmin() {
-  const { actor, isFetching } = useActor();
-
   return useQuery<boolean>({
     queryKey: ["isAdmin"],
-    queryFn: async () => {
-      if (!actor) return false;
-      return actor.isCallerAdmin();
-    },
-    enabled: !!actor && !isFetching,
+    queryFn: async () => false,
     staleTime: 5 * 60 * 1000,
   });
 }
 
 // Hook to assign a role to a user (admin only)
+// Placeholder hook — backend has no role methods in this build
 export function useAssignRole() {
-  const { actor } = useActor();
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async ({
-      principal,
-      role,
-    }: { principal: any; role: UserRole }) => {
-      if (!actor) throw new Error("Actor not available");
-      return actor.assignCallerUserRole(principal, role);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["callerRole"] });
-      queryClient.invalidateQueries({ queryKey: ["isAdmin"] });
-    },
-  });
+  return { mutate: () => {}, isPending: false };
 }

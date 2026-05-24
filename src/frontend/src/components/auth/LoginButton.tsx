@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { useInternetIdentity } from "@caffeineai/core-infrastructure";
 import { useQueryClient } from "@tanstack/react-query";
 import { Loader2, LogIn, LogOut } from "lucide-react";
 import React from "react";
-import { useInternetIdentity } from "../../hooks/useInternetIdentity";
 
 interface LoginButtonProps {
   variant?: "default" | "outline" | "ghost";

@@ -1,19 +1,16 @@
 import { Toaster } from "@/components/ui/sonner";
+import { useInternetIdentity } from "@caffeineai/core-infrastructure";
 import {
   Outlet,
   RouterProvider,
   createRootRoute,
   createRoute,
   createRouter,
-  redirect,
 } from "@tanstack/react-router";
 import { ThemeProvider } from "next-themes";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProfileSetupModal from "./components/auth/ProfileSetupModal";
 import { AppProvider, useAppContext } from "./contexts/AppContext";
-import { useInternetIdentity } from "./hooks/useInternetIdentity";
-import { useIsAdmin } from "./hooks/useQueries";
-import { generateId } from "./lib/utils";
 import ApplicationDetail from "./pages/ApplicationDetail";
 import Apply from "./pages/Apply";
 import Categories from "./pages/Categories";
@@ -23,6 +20,7 @@ import Home from "./pages/Home";
 import MyApplications from "./pages/MyApplications";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
+import ProjectReport from "./pages/ProjectReport";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import type { UserProfile } from "./types";
 
@@ -35,7 +33,6 @@ function RootLayout() {
 function AppShell() {
   const { identity, isInitializing } = useInternetIdentity();
   const { userProfile, setUserProfile } = useAppContext();
-  const { data: isAdmin } = useIsAdmin();
 
   const isAuthenticated = !!identity;
   const showProfileSetup = isAuthenticated && !isInitializing && !userProfile;
@@ -43,11 +40,11 @@ function AppShell() {
   const handleProfileComplete = (
     profileData: Omit<UserProfile, "uid" | "role" | "createdAt">,
   ) => {
-    const uid = identity?.getPrincipal().toString() || generateId();
+    const uid = identity?.getPrincipal().toString() ?? crypto.randomUUID();
     setUserProfile({
       ...profileData,
       uid,
-      role: isAdmin ? "admin" : "user",
+      role: "user",
       createdAt: new Date(),
     });
   };
@@ -132,6 +129,12 @@ const adminRoute = createRoute({
   component: AdminDashboard,
 });
 
+const reportRoute = createRoute({
+  getParentRoute: () => appRoute,
+  path: "/report",
+  component: ProjectReport,
+});
+
 const routeTree = rootRoute.addChildren([
   appRoute.addChildren([
     homeRoute,
@@ -144,6 +147,7 @@ const routeTree = rootRoute.addChildren([
     documentsRoute,
     eligibilityRoute,
     adminRoute,
+    reportRoute,
   ]),
 ]);
 

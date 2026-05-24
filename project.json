@@ -1,0 +1,26 @@
+{
+  "overview": "NotiForm is a decentralized web application built on the Internet Computer that centralizes government forms, scholarships, and job notifications. Citizens can browse opportunities, check eligibility, submit applications, and track their status — all from one place. Includes an admin panel, document vault, and a comprehensive project report page for academic and seminar use.",
+  "features": [
+    "Notification dashboard for browsing government forms, scholarships, and job listings",
+    "Application tracking with status timeline",
+    "Eligibility checker that matches user profile to opportunities",
+    "Document vault for storing important files",
+    "Admin panel for managing forms and reviewing applications",
+    "Internet Identity login with role-based access",
+    "Comprehensive project report page with 10 sections and table of contents",
+    "Print-friendly academic report for seminar use",
+    "Mock data pre-loaded for demo use"
+  ],
+  "category": "productivity",
+  "tags": [
+    "government",
+    "notifications",
+    "scholarships",
+    "jobs",
+    "icp",
+    "decentralized",
+    "civic-tech",
+    "report"
+  ],
+  "last_updated": "2026-05-11T16:21:40.106Z"
+}

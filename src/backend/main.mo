@@ -6,8 +6,8 @@ import Iter "mo:core/Iter";
 import Set "mo:core/Set";
 import Order "mo:core/Order";
 import Nat32 "mo:core/Nat32";
-import AccessControl "authorization/access-control";
-import MixinAuthorization "authorization/MixinAuthorization";
+import AccessControl "mo:caffeineai-authorization/access-control";
+import MixinAuthorization "mo:caffeineai-authorization/MixinAuthorization";
 
 actor {
   // Persistent actor state

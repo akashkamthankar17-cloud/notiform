@@ -1,9 +1,17 @@
+import { useInternetIdentity } from "@caffeineai/core-infrastructure";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Bell, ClipboardList, Grid3X3, Home, Shield, User } from "lucide-react";
+import {
+  Bell,
+  ClipboardList,
+  FileText,
+  Grid3X3,
+  Home,
+  Shield,
+  User,
+} from "lucide-react";
 import type React from "react";
 import LoginButton from "../components/auth/LoginButton";
 import { useAppContext } from "../contexts/AppContext";
-import { useInternetIdentity } from "../hooks/useInternetIdentity";
 
 const NAV_ITEMS = [
   { path: "/", label: "Home", icon: Home },
@@ -11,6 +19,7 @@ const NAV_ITEMS = [
   { path: "/applications", label: "My Apps", icon: ClipboardList },
   { path: "/notifications", label: "Alerts", icon: Bell },
   { path: "/profile", label: "Profile", icon: User },
+  { path: "/report", label: "Report", icon: FileText },
 ];
 
 interface MainLayoutProps {
@@ -28,7 +37,7 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
   const isAdmin = userProfile?.role === "admin";
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* App Bar */}
       <header className="gradient-primary sticky top-0 z-40 shadow-lg">
         <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
@@ -67,7 +76,7 @@ export default function MainLayout({ children, title }: MainLayoutProps) {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 shadow-lg">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-background border-t border-border shadow-lg">
         <div className="max-w-2xl mx-auto flex">
           {NAV_ITEMS.map(({ path, label, icon: Icon }) => {
             const isActive =

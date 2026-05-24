@@ -1,0 +1,12 @@
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+service : {
+  _initializeAccessControl: () -> ();
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  getCallerUserRole: () -> (UserRole) query;
+  isCallerAdmin: () -> (bool) query;
+}
